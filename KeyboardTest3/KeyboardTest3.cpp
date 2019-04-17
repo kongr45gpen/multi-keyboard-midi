@@ -5,7 +5,7 @@
 #include "KeyboardTest3.h"
 #include "guicon.h"
 #include "hidusage.h"
-
+#include "Midi.h"
 
 #include <iostream>
 
@@ -23,6 +23,8 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 HHOOK hHook;
+
+Midi midi;
 
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -141,6 +143,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	fprintf(stdout, "Test output to stdout\n");
 	fprintf(stderr, "Test output to stderr\n");
 	std::cout << "Starting programme\r\n";
+
+	midi.connect();
+
 	// We don't need to do a normal hook, at least for now
 	//hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
 
@@ -261,6 +266,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: Add any drawing code that uses hdc here...
+			FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
             EndPaint(hWnd, &ps);
         }
         break;
@@ -282,17 +288,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			OutputDebugString(TEXT("GetRawInputData does not return correct size !\n"));
 
 		RAWINPUT* raw = (RAWINPUT*)lpb;
-
 		if (raw->header.dwType == RIM_TYPEKEYBOARD)
 		{
-			std::cout << "Make: " << raw->data.keyboard.MakeCode << std::endl;
-			std::cout << "Flags: " << raw->data.keyboard.Flags << std::endl;
-			std::cout << "Reserved: " << raw->data.keyboard.Reserved << std::endl;
-			std::cout << "ExtraInformation: " << raw->data.keyboard.ExtraInformation << std::endl;
+			//std::cout << "Make: " << raw->data.keyboard.MakeCode << std::endl;
+			//std::cout << "Flags: " << raw->data.keyboard.Flags << std::endl;
+			//std::cout << "Reserved: " << raw->data.keyboard.Reserved << std::endl;
+			//std::cout << "ExtraInformation: " << raw->data.keyboard.ExtraInformation << std::endl;
 			std::cout << "Message: " << raw->data.keyboard.Message << std::endl;
 			std::cout << "VKey: " << raw->data.keyboard.VKey << std::endl;
 			std::cout << "Device: " << raw->header.hDevice << std::endl;
 			std::cout << std::endl;
+
+			uint64_t device = (uint64_t)(raw->header.hDevice);
+
+			midi.key(raw->data.keyboard.VKey, device, raw->data.keyboard.Message == WM_KEYDOWN);
 		}
 		
 		delete[] lpb;
