@@ -294,10 +294,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			//std::cout << "Flags: " << raw->data.keyboard.Flags << std::endl;
 			//std::cout << "Reserved: " << raw->data.keyboard.Reserved << std::endl;
 			//std::cout << "ExtraInformation: " << raw->data.keyboard.ExtraInformation << std::endl;
-			std::cout << "Message: " << raw->data.keyboard.Message << std::endl;
-			std::cout << "VKey: " << raw->data.keyboard.VKey << std::endl;
-			std::cout << "Device: " << raw->header.hDevice << std::endl;
-			std::cout << std::endl;
+			//std::cout << "Message: " << raw->data.keyboard.Message << std::endl;
+			//std::cout << "VKey: " << raw->data.keyboard.VKey << std::endl;
+			//std::cout << "Device: " << raw->header.hDevice << std::endl;
+			//std::cout << std::endl;
 
 			uint64_t device = (uint64_t)(raw->header.hDevice);
 
