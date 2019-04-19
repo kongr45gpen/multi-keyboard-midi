@@ -36,6 +36,12 @@
     <ClInclude Include="..\rtmidi\RtMidi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\WinToast\src\wintoastlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinToastHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\rtmidi\RtMidi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WinToast\src\wintoastlib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinToastHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

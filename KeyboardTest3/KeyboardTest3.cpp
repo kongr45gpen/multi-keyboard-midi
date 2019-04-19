@@ -6,6 +6,8 @@
 #include "guicon.h"
 #include "hidusage.h"
 #include "Midi.h"
+#include "WinToastHandler.h"
+#include "../WinToast/src/wintoastlib.h"
 
 #include <iostream>
 
@@ -21,6 +23,8 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+WinToastHandler handler; // Does nothing
 
 HHOOK hHook;
 
@@ -222,6 +226,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    RedirectIOToConsole();
    RawInput(hWnd);
 
+   
+	WinToastLib::WinToast::instance()->setAppName(L"WinToastExample");
+   const auto aumi = WinToastLib::WinToast::configureAUMI(L"kongr45gpen", L"wintoast", L"wintoastexample", L"20161006");
+	WinToastLib::WinToast::instance()->setAppUserModelId(aumi);
+	WinToastLib::WinToast::instance()->initialize();
+
+	WinToastLib::WinToastTemplate templ = WinToastLib::WinToastTemplate(WinToastLib::WinToastTemplate::Text01);
+	templ.setTextField(L"title", WinToastLib::WinToastTemplate::FirstLine);
+    WinToastLib::WinToast::instance()->showToast(templ, &handler);
+
    UpdateWindow(hWnd);
 
    //RawInput(hWnd);
@@ -300,8 +314,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			//std::cout << std::endl;
 
 			uint64_t device = (uint64_t)(raw->header.hDevice);
-
+			
 			midi.key(raw->data.keyboard.VKey, device, raw->data.keyboard.Message == WM_KEYDOWN);
+
+			if (midi.toastExists) {
+				midi.toastExists = false;
+				WinToastLib::WinToastTemplate templ = WinToastLib::WinToastTemplate(WinToastLib::WinToastTemplate::Text01);
+				templ.setExpiration(1000);
+				templ.setTextField(midi.toastText, WinToastLib::WinToastTemplate::FirstLine);
+				WinToastLib::WinToast::instance()->showToast(templ, &handler);
+			}
 		}
 		
 		delete[] lpb;

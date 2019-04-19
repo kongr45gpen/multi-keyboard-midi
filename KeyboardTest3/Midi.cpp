@@ -208,6 +208,9 @@ void Midi::key(USHORT key, uint64_t device, bool down) {
 		if (!down) {
 			if ((GetKeyState(VK_CAPITAL) & 0x0001) == 0) {
 				std::cout << "DISABLING" << std::endl;
+				toastExists = true;
+				toastText = L"Disabled keyboard-to-MIDI";
+
 				// Caps Lock is OFF
 				enabled = false;
 				for (size_t i = 0; i < pressed.size(); i++) {
@@ -225,6 +228,8 @@ void Midi::key(USHORT key, uint64_t device, bool down) {
 				// Caps Lock is ON
 				enabled = true;
 				std::cout << "ENABLING" << std::endl;
+				toastExists = true;
+				toastText = L"!! Enabling keyboard-to-MIDI";
 			}
 		}
 
