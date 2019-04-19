@@ -11,6 +11,10 @@
 
 #include <iostream>
 
+#pragma comment( lib, "user32.lib")
+#pragma comment( lib, "gdi32.lib")
+
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -35,7 +39,18 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 	tagKBDLLHOOKSTRUCT* tag;
 	tag = (tagKBDLLHOOKSTRUCT*) lParam;
 	std::cout << nCode << " " << wParam << " " << tag->dwExtraInfo << " " << tag->flags << " " << tag->scanCode << " " << tag->time << " " << tag->vkCode << std::endl;
-	return CallNextHookEx(hHook, nCode, wParam, lParam);
+	//return 1;
+
+	KBDLLHOOKSTRUCT* pkbhs = reinterpret_cast<KBDLLHOOKSTRUCT*>(lParam);
+	if (pkbhs->vkCode == VK_CAPITAL) {
+		return CallNextHookEx(hHook, nCode, wParam, lParam);
+	}
+	else {
+		return CallNextHookEx(hHook, nCode, wParam, lParam);
+		//return 1;
+	}
+
+	
 }
 
 // register Scanner
@@ -153,6 +168,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// We don't need to do a normal hook, at least for now
 	//hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
 
+
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_KEYBOARDTEST3));
 
     MSG msg;
@@ -224,7 +240,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
 
    RedirectIOToConsole();
+
+   //hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
    RawInput(hWnd);
+
 
    
 	WinToastLib::WinToast::instance()->setAppName(L"WinToastExample");
@@ -235,6 +254,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	WinToastLib::WinToastTemplate templ = WinToastLib::WinToastTemplate(WinToastLib::WinToastTemplate::Text01);
 	templ.setTextField(L"title", WinToastLib::WinToastTemplate::FirstLine);
     WinToastLib::WinToast::instance()->showToast(templ, &handler);
+
 
    UpdateWindow(hWnd);
 
@@ -320,7 +340,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			if (midi.toastExists) {
 				midi.toastExists = false;
 				WinToastLib::WinToastTemplate templ = WinToastLib::WinToastTemplate(WinToastLib::WinToastTemplate::Text01);
-				templ.setExpiration(1000);
+				templ.setExpiration(2000);
 				templ.setTextField(midi.toastText, WinToastLib::WinToastTemplate::FirstLine);
 				WinToastLib::WinToast::instance()->showToast(templ, &handler);
 			}
