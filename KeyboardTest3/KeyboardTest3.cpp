@@ -8,12 +8,12 @@
 #include "Midi.h"
 #include "WinToastHandler.h"
 #include "../WinToast/src/wintoastlib.h"
+#include "hook.h"
 
 #include <iostream>
 
 #pragma comment( lib, "user32.lib")
 #pragma comment( lib, "gdi32.lib")
-
 
 #define MAX_LOADSTRING 100
 
@@ -37,41 +37,14 @@ Midi midi;
 WCHAR arg[20] = L"KeyboardTest3.exe 1";
 
 unsigned int instanceNumber = 0;
+static UINT UWM_HOOK = ::RegisterWindowMessage(UWM_HOOK_MSG);
 
-void StartAnotherProcess()
+
+LRESULT OnLLKP(WPARAM wParam, LPARAM lParam)
 {
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
-
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
-
-	// Start the child process. 
-	if (!CreateProcess(NULL,   // No module name (use command line)
-		arg,        // Command line
-		NULL,           // Process handle not inheritable
-		NULL,           // Thread handle not inheritable
-		FALSE,          // Set handle inheritance to FALSE
-		0,              // No creation flags
-		NULL,           // Use parent's environment block
-		NULL,           // Use parent's starting directory 
-		&si,            // Pointer to STARTUPINFO structure
-		&pi)           // Pointer to PROCESS_INFORMATION structure
-		)
-	{
-		printf("CreateProcess failed (%d).\n", GetLastError());
-	
-		return;
-	}
-
-	// Wait until child process exits.
-	// WaitForSingleObject(pi.hProcess, INFINITE);
-
-	// Close process and thread handles. 
-	// CloseHandle(pi.hProcess);
-	// CloseHandle(pi.hThread);
+	std::cout << "LLKP event received " << wParam << " " << lParam << std::endl;
 }
+
 
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -284,18 +257,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    RedirectIOToConsole();
 
-   if (instanceNumber == 1) {
-	   Sleep(1000);
-	   RawInput(hWnd);
-   }
-   else {
-	   hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
-   }
-   
-   if (instanceNumber == 0) {
-	   StartAnotherProcess();
-   }
+   LoadLibrary(L"HookDll.dll");
 
+	RawInput(hWnd);
+	//hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
 
    
 	WinToastLib::WinToast::instance()->setAppName(L"WinToastExample");

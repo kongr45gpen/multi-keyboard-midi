@@ -3,6 +3,7 @@
 #include "Windows.h"
 #include "../rtmidi/RtMidi.h"
 #include <iostream>
+#include <iomanip>
 
 void Midi::keyDown(uint8_t key, uint8_t velocity)
 {
@@ -260,6 +261,7 @@ void Midi::key(USHORT key, uint64_t device, bool down) {
 			else {
 				keyUp(note);
 			}
+			std::cout << "key " << std::setw(5) << note << " is " << down << std::endl;
 			pressed[note] = down;
 		}
 	}

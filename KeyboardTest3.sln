@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeyboardTest3", "KeyboardTest3\KeyboardTest3.vcxproj", "{1FDB8464-B918-460F-BB6E-133286C1DB46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{047F4519-0B72-433E-9CF9-07F3912FBA15} = {047F4519-0B72-433E-9CF9-07F3912FBA15}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookDll", "HookDll\HookDll.vcxproj", "{047F4519-0B72-433E-9CF9-07F3912FBA15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{1FDB8464-B918-460F-BB6E-133286C1DB46}.Release|x64.Build.0 = Release|x64
 		{1FDB8464-B918-460F-BB6E-133286C1DB46}.Release|x86.ActiveCfg = Release|x64
 		{1FDB8464-B918-460F-BB6E-133286C1DB46}.Release|x86.Build.0 = Release|x64
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Debug|x64.ActiveCfg = Debug|x64
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Debug|x64.Build.0 = Debug|x64
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Debug|x86.ActiveCfg = Debug|Win32
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Debug|x86.Build.0 = Debug|Win32
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Release|x64.ActiveCfg = Release|x64
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Release|x64.Build.0 = Release|x64
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Release|x86.ActiveCfg = Release|Win32
+		{047F4519-0B72-433E-9CF9-07F3912FBA15}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
