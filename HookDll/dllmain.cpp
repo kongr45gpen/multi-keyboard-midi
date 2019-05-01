@@ -46,7 +46,6 @@ bool __stdcall DllMain(HINSTANCE hInst, DWORD Reason, LPVOID reserved)
 		// This code initializes the hook notification message
 		UWM_HOOK = RegisterWindowMessage(UWM_HOOK_MSG);
 		std::cout << "DLL process attached" << std::endl;
-		setHook(NULL);
 		return TRUE;
 
 		//**********************************************
