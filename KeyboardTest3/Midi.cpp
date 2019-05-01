@@ -173,7 +173,7 @@ void Midi::connect()
 		try {
 			portName = midiout->getPortName(i);
 
-			if (portName == "LoopBe Internal MIDI 1") {
+			if (portName == "LoopBe Internal MIDI 1" || portName == "loopMIDI Port 1") {
 				designatedPort = i;
 				std::cout << "Found designated port " << i << std::endl;
 			}
@@ -189,10 +189,10 @@ void Midi::connect()
 
 	try {
 		midiout->openPort(designatedPort);
-		message[0] = 144;
-		message[1] = 64;
-		message[2] = 90;
-		midiout->sendMessage(&message);
+		//message[0] = 144;
+		//message[1] = 64;
+		//message[2] = 90;
+		//midiout->sendMessage(&message);
 	}
 	catch (RtMidiError &error) {
 		error.printMessage();

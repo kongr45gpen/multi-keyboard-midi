@@ -20,7 +20,7 @@ using namespace std;
 
 static const WORD MAX_CONSOLE_LINES = 500;
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 
 void RedirectIOToConsole()
 
@@ -66,7 +66,7 @@ void RedirectIOToConsole()
 
 }
 
-#endif
+//#endif
 
 //End of File
 

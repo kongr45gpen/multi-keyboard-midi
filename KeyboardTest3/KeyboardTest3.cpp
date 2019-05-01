@@ -34,10 +34,50 @@ HHOOK hHook;
 
 Midi midi;
 
+WCHAR arg[20] = L"KeyboardTest3.exe 1";
+
+unsigned int instanceNumber = 0;
+
+void StartAnotherProcess()
+{
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+
+	// Start the child process. 
+	if (!CreateProcess(NULL,   // No module name (use command line)
+		arg,        // Command line
+		NULL,           // Process handle not inheritable
+		NULL,           // Thread handle not inheritable
+		FALSE,          // Set handle inheritance to FALSE
+		0,              // No creation flags
+		NULL,           // Use parent's environment block
+		NULL,           // Use parent's starting directory 
+		&si,            // Pointer to STARTUPINFO structure
+		&pi)           // Pointer to PROCESS_INFORMATION structure
+		)
+	{
+		printf("CreateProcess failed (%d).\n", GetLastError());
+	
+		return;
+	}
+
+	// Wait until child process exits.
+	// WaitForSingleObject(pi.hProcess, INFINITE);
+
+	// Close process and thread handles. 
+	// CloseHandle(pi.hProcess);
+	// CloseHandle(pi.hThread);
+}
+
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	tagKBDLLHOOKSTRUCT* tag;
 	tag = (tagKBDLLHOOKSTRUCT*) lParam;
+
 	std::cout << nCode << " " << wParam << " " << tag->dwExtraInfo << " " << tag->flags << " " << tag->scanCode << " " << tag->time << " " << tag->vkCode << std::endl;
 	//return 1;
 
@@ -46,6 +86,8 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 		return CallNextHookEx(hHook, nCode, wParam, lParam);
 	}
 	else {
+		return 1;
+		//Sleep(100);
 		return CallNextHookEx(hHook, nCode, wParam, lParam);
 		//return 1;
 	}
@@ -59,7 +101,7 @@ void InitRawInput(HWND hwnd) {
 	RAWINPUTDEVICE Rid[1];
 	Rid[0].usUsagePage = HID_USAGE_PAGE_GENERIC;
 	Rid[0].usUsage = HID_USAGE_GENERIC_KEYBOARD;
-	Rid[0].dwFlags = RIDEV_INPUTSINK;
+	Rid[0].dwFlags = RIDEV_INPUTSINK | RIDEV_NOLEGACY;
 	Rid[0].hwndTarget = hwnd;
 	if (RegisterRawInputDevices(Rid, 1, sizeof(Rid[0])) == false)
 	{
@@ -142,9 +184,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+	instanceNumber = (*lpCmdLine) != 0;
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -161,7 +203,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	RedirectIOToConsole();
 	fprintf(stdout, "Test output to stdout\n");
 	fprintf(stderr, "Test output to stderr\n");
-	std::cout << "Starting programme\r\n";
+	std::cout << (*lpCmdLine) << std::endl;
+
 
 	midi.connect();
 
@@ -231,7 +274,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-
+ 
    if (!hWnd)
    {
       return FALSE;
@@ -241,19 +284,24 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    RedirectIOToConsole();
 
-   //hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
-   RawInput(hWnd);
+   if (instanceNumber == 1) {
+	   Sleep(1000);
+	   RawInput(hWnd);
+   }
+   else {
+	   hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
+   }
+   
+   if (instanceNumber == 0) {
+	   StartAnotherProcess();
+   }
 
 
    
 	WinToastLib::WinToast::instance()->setAppName(L"WinToastExample");
-   const auto aumi = WinToastLib::WinToast::configureAUMI(L"kongr45gpen", L"wintoast", L"wintoastexample", L"20161006");
+    const auto aumi = WinToastLib::WinToast::configureAUMI(L"kongr45gpen", L"wintoast", L"wintoastexample", L"20161006");
 	WinToastLib::WinToast::instance()->setAppUserModelId(aumi);
 	WinToastLib::WinToast::instance()->initialize();
-
-	WinToastLib::WinToastTemplate templ = WinToastLib::WinToastTemplate(WinToastLib::WinToastTemplate::Text01);
-	templ.setTextField(L"title", WinToastLib::WinToastTemplate::FirstLine);
-    WinToastLib::WinToast::instance()->showToast(templ, &handler);
 
 
    UpdateWindow(hWnd);
