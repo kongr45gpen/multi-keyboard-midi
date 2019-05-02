@@ -342,7 +342,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			uint64_t device = (uint64_t)(raw->header.hDevice);
 
-			midi.key(raw->data.keyboard.VKey, device, raw->data.keyboard.Message == WM_KEYDOWN);
+			midi.key(raw->data.keyboard.VKey, device, raw->data.keyboard.Message == WM_KEYDOWN, raw->data.keyboard.Flags, raw->data.keyboard.MakeCode);
 
 			if (midi.toastExists) {
 				midi.toastExists = false;

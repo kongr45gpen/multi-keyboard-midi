@@ -42,114 +42,164 @@ Midi::Midi()
 	keysToNotes2.fill(255);
 
 	// Function row
-	keysToNotes1[VK_ESCAPE] = 0x01;
-	keysToNotes1[VK_F1] = 0x54;
-	keysToNotes1[VK_F2] = 0x55;
-	keysToNotes1[VK_F3] = 0x56;
-	keysToNotes1[VK_F4] = 0x57;
-	keysToNotes1[VK_F5] = 0x58;
-	keysToNotes1[VK_F6] = 0x59;
-	keysToNotes1[VK_F7] = 0x5A;
-	keysToNotes1[VK_F8] = 0x5B;
-	keysToNotes1[VK_F9] = 0x5C;
-	keysToNotes1[VK_F10] = 0x5D;
-	keysToNotes1[VK_F11] = 0x5E;
-	keysToNotes1[VK_F12] = 0x5F;
-	keysToNotes1[VK_SNAPSHOT] = 0x37;
-	keysToNotes1[VK_INSERT] = 0x6B;
-	keysToNotes1[VK_DELETE] = 0x6C;
-	keysToNotes1[VK_HOME] = 0x60;
-	keysToNotes1[VK_END] = 0x68;
-	keysToNotes1[VK_PRIOR] = 0x62;
-	keysToNotes1[VK_NEXT] = 0x6A;
+	keysToNotes1[VK_ESCAPE] = 0x00;
+	keysToNotes1[VK_F1] = 0x01;
+	keysToNotes1[VK_F2] = 0x02;
+	keysToNotes1[VK_F3] = 0x03;
+	keysToNotes1[VK_F4] = 0x04;
+	keysToNotes1[VK_F5] = 0x05;
+	keysToNotes1[VK_F6] = 0x06;
+	keysToNotes1[VK_F7] = 0x07;
+	keysToNotes1[VK_F8] = 0x08;
+	keysToNotes1[VK_F9] = 0x09;
+	keysToNotes1[VK_F10] = 0x0A;
+	keysToNotes1[VK_F11] = 0x0B;
+	keysToNotes1[VK_F12] = 0x0C;
+	keysToNotes1[VK_SNAPSHOT] = 0x0D;
+	keysToNotes1[VK_INSERT] = 0x0E;
+	keysToNotes1[VK_DELETE] = 0x0F;
+	keysToNotes1[VK_HOME] = 0x10;
+	keysToNotes1[VK_END] = 0x11;
+	keysToNotes1[VK_PRIOR] = 0x12;
+	keysToNotes1[VK_NEXT] = 0x13;
 
 	// Numbers row
-	keysToNotes1[VK_OEM_3] = 0x29; // ` key
-	keysToNotes1['1'] = 0x02;
-	keysToNotes1['2'] = 0x03;
-	keysToNotes1['3'] = 0x04;
-	keysToNotes1['4'] = 0x05;
-	keysToNotes1['5'] = 0x06;
-	keysToNotes1['6'] = 0x07;
-	keysToNotes1['7'] = 0x08;
-	keysToNotes1['8'] = 0x09;
-	keysToNotes1['9'] = 0x0A;
-	keysToNotes1['0'] = 0x0B;
-	keysToNotes1[VK_OEM_MINUS] = 0x0C;
-	keysToNotes1['='] = 0x0D;
-	keysToNotes1[VK_BACK] = 0x0E;
+	keysToNotes1[VK_OEM_3] = 0x14; // ` key
+	keysToNotes1['1'] = 0x15;
+	keysToNotes1['2'] = 0x16;
+	keysToNotes1['3'] = 0x17;
+	keysToNotes1['4'] = 0x18;
+	keysToNotes1['5'] = 0x19;
+	keysToNotes1['6'] = 0x1A;
+	keysToNotes1['7'] = 0x1B;
+	keysToNotes1['8'] = 0x1C;
+	keysToNotes1['9'] = 0x1D;
+	keysToNotes1['0'] = 0x1E;
+	keysToNotes1[VK_OEM_MINUS] = 0x1F;
+	keysToNotes1[VK_OEM_PLUS] = 0x20;
+	keysToNotes1[VK_BACK] = 0x21;
 
 	// Top row
-	keysToNotes1[VK_TAB] = 0x0F;
-	keysToNotes1['Q'] = 0x10;
-	keysToNotes1['W'] = 0x11;
-	keysToNotes1['E'] = 0x12;
-	keysToNotes1['R'] = 0x13;
-	keysToNotes1['T'] = 0x14;
-	keysToNotes1['Y'] = 0x15;
-	keysToNotes1['U'] = 0x16;
-	keysToNotes1['I'] = 0x17;
-	keysToNotes1['O'] = 0x18;
-	keysToNotes1['P'] = 0x19;
-	keysToNotes1[VK_OEM_4] = 0x1A; // left bracket
-	keysToNotes1[VK_OEM_6] = 0x1B;
-	keysToNotes1[VK_OEM_5] = 0x2B; // \ key
+	keysToNotes1[VK_TAB] = 0x22;
+	keysToNotes1['Q'] = 0x23;
+	keysToNotes1['W'] = 0x24;
+	keysToNotes1['E'] = 0x25;
+	keysToNotes1['R'] = 0x26;
+	keysToNotes1['T'] = 0x27;
+	keysToNotes1['Y'] = 0x28;
+	keysToNotes1['U'] = 0x29;
+	keysToNotes1['I'] = 0x2A;
+	keysToNotes1['O'] = 0x2B;
+	keysToNotes1['P'] = 0x2C;
+	keysToNotes1[VK_OEM_4] = 0x2D; // left bracket
+	keysToNotes1[VK_OEM_6] = 0x2E;
+	keysToNotes1[VK_OEM_5] = 0x2F; // \ key
 
 	// Middle row
-	keysToNotes1['A'] = 0x1E;
-	keysToNotes1['S'] = 0x1F;
-	keysToNotes1['D'] = 0x20;
-	keysToNotes1['F'] = 0x21;
-	keysToNotes1['G'] = 0x22;
-	keysToNotes1['H'] = 0x23;
-	keysToNotes1['J'] = 0x24;
-	keysToNotes1['K'] = 0x25;
-	keysToNotes1['L'] = 0x26;
-	keysToNotes1[VK_OEM_1] = 0x27; // ; key
-	keysToNotes1[VK_OEM_7] = 0x28; // ' key
-	keysToNotes1[VK_RETURN] = 0x1C;
+	keysToNotes1['A'] = 0x30;
+	keysToNotes1['S'] = 0x31;
+	keysToNotes1['D'] = 0x32;
+	keysToNotes1['F'] = 0x33;
+	keysToNotes1['G'] = 0x34;
+	keysToNotes1['H'] = 0x35;
+	keysToNotes1['J'] = 0x36;
+	keysToNotes1['K'] = 0x37;
+	keysToNotes1['L'] = 0x38;
+	keysToNotes1[VK_OEM_1] = 0x39; // ; key
+	keysToNotes1[VK_OEM_7] = 0x3A; // ' key
+	keysToNotes1[VK_RETURN] = 0x3B;
 
 	// Bottom row
-	keysToNotes1[VK_LSHIFT] = 0x2A;
-	keysToNotes1['Z'] = 0x2C;
-	keysToNotes1['X'] = 0x2D;
-	keysToNotes1['C'] = 0x2E;
-	keysToNotes1['V'] = 0x2F;
-	keysToNotes1['B'] = 0x30;
-	keysToNotes1['N'] = 0x31;
-	keysToNotes1['M'] = 0x32;
-	keysToNotes1[VK_OEM_COMMA] = 0x33;
-	keysToNotes1[VK_OEM_PERIOD] = 0x34;
-	keysToNotes1[VK_OEM_2] = 0x35; // / key
-	keysToNotes1[VK_RSHIFT] = 0x36;
+	keysToNotes1[VK_LSHIFT] = 0x3C;
+	keysToNotes1['Z'] = 0x3D;
+	keysToNotes1['X'] = 0x3E;
+	keysToNotes1['C'] = 0x3F;
+	keysToNotes1['V'] = 0x40;
+	keysToNotes1['B'] = 0x41;
+	keysToNotes1['N'] = 0x42;
+	keysToNotes1['M'] = 0x43;
+	keysToNotes1[VK_OEM_COMMA] = 0x44;
+	keysToNotes1[VK_OEM_PERIOD] = 0x45;
+	keysToNotes1[VK_OEM_2] = 0x46; // / key
+	keysToNotes1[VK_RSHIFT] = 0x47;
 
 	// Full-bottom row
-	keysToNotes1[VK_LCONTROL] = 0x1D;
-	keysToNotes1[VK_SPACE] = 0x39;
-	keysToNotes1[VK_APPS] = 0x76;
-	keysToNotes1[VK_RCONTROL] = 0x1D;
+	keysToNotes1[VK_LCONTROL] = 0x48;
+	keysToNotes1[VK_SPACE] = 0x49;
+	keysToNotes1[VK_APPS] = 0x4A;
+	keysToNotes1[VK_RCONTROL] = 0x4B;
 
 	// Numpad
-	keysToNotes1[VK_NUMPAD0] = 0x40;
-	keysToNotes1[VK_NUMPAD1] = 0x41;
-	keysToNotes1[VK_NUMPAD2] = 0x42;
-	keysToNotes1[VK_NUMPAD3] = 0x43;
-	keysToNotes1[VK_NUMPAD4] = 0x44;
-	keysToNotes1[VK_NUMPAD5] = 0x45;
-	keysToNotes1[VK_NUMPAD6] = 0x46;
-	keysToNotes1[VK_NUMPAD7] = 0x47;
-	keysToNotes1[VK_NUMPAD8] = 0x48;
-	keysToNotes1[VK_NUMPAD9] = 0x49;
+	keysToNotes1[VK_NUMPAD0] = 0x4C;
+	keysToNotes1[VK_NUMPAD1] = 0x4D;
+	keysToNotes1[VK_NUMPAD2] = 0x4E;
+	keysToNotes1[VK_NUMPAD3] = 0x4F;
+	keysToNotes1[VK_NUMPAD4] = 0x50;
+	keysToNotes1[VK_NUMPAD5] = 0x51;
+	keysToNotes1[VK_NUMPAD6] = 0x52;
+	keysToNotes1[VK_NUMPAD7] = 0x53;
+	keysToNotes1[VK_NUMPAD8] = 0x54;
+	keysToNotes1[VK_NUMPAD9] = 0x55;
 
-	keysToNotes2['A'] = 0x70;
-	keysToNotes2['S'] = 0x71;
-	keysToNotes2['D'] = 0x72;
-	keysToNotes2['F'] = 0x73;
-	keysToNotes2['G'] = 0x74;
-	keysToNotes2['H'] = 0x75;
-	keysToNotes2['J'] = 0x76;
-	keysToNotes2['K'] = 0x77;
-	keysToNotes2['L'] = 0x78;
+	// Now, perform the calculations for the second keyboard
+	// Copy all the keys in a transposed way
+	for (int i = 0; i < 255; i++) {
+		uint8_t note = keysToNotes1[i];
+		if (note > 0x21) note--;
+		if (note > 0x22) note--;
+		if (note > 0x2F) note--;
+		if (note > 0x3B) note--;
+		if (note > 0x3C) note--;
+		keysToNotes2[i] = keysToNotes1[i] + 0x55 - 0x14;
+	}
+
+	// Function row stays the same
+	keysToNotes2[VK_ESCAPE] = keysToNotes1[VK_ESCAPE];
+	keysToNotes2[VK_F1] = keysToNotes1[VK_F1];
+	keysToNotes2[VK_F2] = keysToNotes1[VK_F2];
+	keysToNotes2[VK_F3] = keysToNotes1[VK_F3];
+	keysToNotes2[VK_F4] = keysToNotes1[VK_F4];
+	keysToNotes2[VK_F5] = keysToNotes1[VK_F5];
+	keysToNotes2[VK_F6] = keysToNotes1[VK_F6];
+	keysToNotes2[VK_F7] = keysToNotes1[VK_F7];
+	keysToNotes2[VK_F8] = keysToNotes1[VK_F8];
+	keysToNotes2[VK_F9] = keysToNotes1[VK_F9];
+	keysToNotes2[VK_F10] = keysToNotes1[VK_F10];
+	keysToNotes2[VK_F11] = keysToNotes1[VK_F11];
+	keysToNotes2[VK_F12] = keysToNotes1[VK_F12];
+	keysToNotes2[VK_SNAPSHOT] = keysToNotes1[VK_SNAPSHOT];
+	keysToNotes2[VK_INSERT] = keysToNotes1[VK_INSERT];
+	keysToNotes2[VK_DELETE] = keysToNotes1[VK_DELETE];
+	keysToNotes2[VK_HOME] = keysToNotes1[VK_HOME];
+	keysToNotes2[VK_END] = keysToNotes1[VK_END];
+	keysToNotes2[VK_PRIOR] = keysToNotes1[VK_PRIOR];
+	keysToNotes2[VK_NEXT] = keysToNotes1[VK_NEXT];
+	// Numpad stays the same (takes care of laptops without numpad)
+	keysToNotes2[VK_NUMPAD0] = keysToNotes1[VK_NUMPAD0];
+	keysToNotes2[VK_NUMPAD1] = keysToNotes1[VK_NUMPAD1];
+	keysToNotes2[VK_NUMPAD2] = keysToNotes1[VK_NUMPAD2];
+	keysToNotes2[VK_NUMPAD3] = keysToNotes1[VK_NUMPAD3];
+	keysToNotes2[VK_NUMPAD4] = keysToNotes1[VK_NUMPAD4];
+	keysToNotes2[VK_NUMPAD5] = keysToNotes1[VK_NUMPAD5];
+	keysToNotes2[VK_NUMPAD6] = keysToNotes1[VK_NUMPAD6];
+	keysToNotes2[VK_NUMPAD7] = keysToNotes1[VK_NUMPAD7];
+	keysToNotes2[VK_NUMPAD8] = keysToNotes1[VK_NUMPAD8];
+	keysToNotes2[VK_NUMPAD9] = keysToNotes1[VK_NUMPAD9];
+	// Symbols from the bottom row stay the same
+	keysToNotes2[VK_OEM_COMMA] = keysToNotes1[VK_OEM_COMMA];
+	keysToNotes2[VK_OEM_PERIOD] = keysToNotes1[VK_OEM_PERIOD];
+	keysToNotes2[VK_OEM_2] = keysToNotes1[VK_OEM_2];
+	keysToNotes2[VK_RSHIFT] = keysToNotes1[VK_RSHIFT];
+	keysToNotes2[VK_LCONTROL] = keysToNotes1[VK_LCONTROL];
+	keysToNotes2[VK_SPACE] = keysToNotes1[VK_SPACE];
+	keysToNotes2[VK_APPS] = keysToNotes1[VK_APPS];
+	keysToNotes2[VK_RCONTROL] = keysToNotes1[VK_RCONTROL];
+	// Some extra symbols stay the same
+	keysToNotes2[VK_BACK] = 0x21;
+	keysToNotes2[VK_TAB] = 0x22;
+	keysToNotes2[VK_OEM_5] = 0x2F; // \ key
+	keysToNotes2[VK_RETURN] = 0x3B;
+	keysToNotes2[VK_LSHIFT] = 0x3C;
 }
 
 void Midi::connect()
@@ -203,7 +253,7 @@ void Midi::connect()
 
 
 
-void Midi::key(USHORT key, uint64_t device, bool down) {
+void Midi::key(USHORT key, uint64_t device, bool down, USHORT flags, USHORT makeCode) {
 	// First of all, check if CAPS LOCK was pressed
 	if (key == VK_CAPITAL) {
 		if (!down) {
@@ -244,14 +294,33 @@ void Midi::key(USHORT key, uint64_t device, bool down) {
 			std::cout << "Associated device " << device << " as keyboard #1. Proceed with your other devices!" << std::endl;
 		}
 
+		// ???
+		if (key == VK_SHIFT) {
+			key = (makeCode == 0x36) ? VK_RSHIFT : VK_LSHIFT;
+		}
+		else if (key == VK_CONTROL) {
+			key = ((flags & RI_KEY_E0) != 0) ? VK_LCONTROL : VK_RCONTROL;
+		}
+		else if (key == VK_MENU) {
+			key = ((flags & RI_KEY_E0) != 0) ? VK_LMENU : VK_RMENU;
+		}
+
 		uint8_t note;
 		if (key >= Midi::MAXKEYS) {
 			note = 255;
-		} else if (device == deviceOne) {
+		}
+		else if (device == deviceOne) {
 			note = keysToNotes1[key];
-		} else {
+		}
+		else {
 			note = keysToNotes2[key];
 		}
+
+		/*
+		std::cout << "rcvevt " << std::setw(5) << std::hex << ((int)key) << "->"
+			<< std::setw(5) << ((int)note) << " is " << down
+			<< std::endl << std::dec;
+		*/
 
 		if (note < 128 && pressed[note] != down) { // status has changed
 			// Key was pressed, party!
@@ -261,8 +330,14 @@ void Midi::key(USHORT key, uint64_t device, bool down) {
 			else {
 				keyUp(note);
 			}
-			std::cout << "key " << std::setw(5) << note << " is " << down << std::endl;
+			std::cout << "key " << std::setw(5) << std::hex << ((int)key) << "->"
+				<< std::setw(5) << ((int)note) << " is " << down << std::endl;
 			pressed[note] = down;
+		}
+
+		if (note >= 128) {
+			std::cout << "unknown press " << std::setw(5) << std::hex << ((int)key) << "->"
+				<< std::setw(5) << ((int)note) << " is " << down << std::endl << std::dec;
 		}
 	}
 }

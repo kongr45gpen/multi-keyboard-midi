@@ -34,7 +34,7 @@ public:
 
 	void connect();
 
-	void key(USHORT key, uint64_t device, bool down);
+	void key(USHORT key, uint64_t device, bool down, USHORT flags = 0, USHORT makeCode = 0);
 
 	bool toastExists;
 	std::wstring toastText;
